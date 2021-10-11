@@ -1,0 +1,6 @@
+= PZPlugin
+
+== Endpoints
+
+* Authentification
+* Message from PZ Mod (est-ce que le perso à des chaussures, est dans une maison)
