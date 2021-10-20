@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.awt.*;
 import java.util.stream.Stream;
 
-public class TestPZIdMatcher {
+public class TestPromptParser001 {
 
 
     public static Stream<Arguments> prompts() {
