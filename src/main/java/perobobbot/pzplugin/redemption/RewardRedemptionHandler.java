@@ -3,11 +3,6 @@ package perobobbot.pzplugin.redemption;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import perobobbot.data.com.NotEnoughPoints;
-import perobobbot.data.service.BankService;
-import perobobbot.data.service.ViewerIdentityService;
-import perobobbot.lang.Platform;
-import perobobbot.lang.PointType;
 import perobobbot.lang.fp.Function1;
 import perobobbot.pzplugin.RedemptionCompleter;
 import perobobbot.pzplugin.rewards.ParsedRedemption;
@@ -15,9 +10,6 @@ import perobobbot.twitch.api.RewardRedemptionStatus;
 import perobobbot.twitch.api.UserInfo;
 import perobobbot.twitch.client.api.TwitchService;
 import perobobbot.twitch.client.api.channelpoints.UpdateRedemptionStatus;
-
-import java.time.Duration;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 public class RewardRedemptionHandler {

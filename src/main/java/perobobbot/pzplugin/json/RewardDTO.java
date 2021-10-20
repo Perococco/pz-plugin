@@ -2,9 +2,7 @@ package perobobbot.pzplugin.json;
 
 import lombok.NonNull;
 import lombok.Value;
-import org.springframework.jmx.export.annotation.ManagedNotification;
 import perobobbot.pzplugin.Tools;
-import perobobbot.pzplugin.endpoint.RewardUpdater;
 import perobobbot.pzplugin.rewards.ParsedReward;
 import perobobbot.pzplugin.rewards.Prompt;
 import perobobbot.twitch.client.api.channelpoints.CustomReward;

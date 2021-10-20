@@ -4,7 +4,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import perobobbot.pzplugin.Tools;
 import perobobbot.twitch.client.api.channelpoints.CustomReward;
-import perobobbot.twitch.eventsub.api.event.ChannelPointsCustomRewardRedemptionAddEvent;
 
 import java.util.Optional;
 

@@ -6,7 +6,6 @@ import jplugman.api.Plugin;
 import jplugman.api.Requirement;
 import jplugman.api.ServiceProvider;
 import lombok.NonNull;
-import perobobbot.data.service.OAuthService;
 import perobobbot.plugin.PerobobbotPlugin;
 
 /**

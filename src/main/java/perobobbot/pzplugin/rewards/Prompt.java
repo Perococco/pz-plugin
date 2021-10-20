@@ -8,8 +8,6 @@ import java.awt.*;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public record Prompt(@NonNull String kind, int cost, @NonNull Color color, @NonNull String value) {
 

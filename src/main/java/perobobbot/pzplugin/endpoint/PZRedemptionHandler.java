@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import perobobbot.endpoint.EndPoint;
 import perobobbot.endpoint.SecuredEndPoint;
 import perobobbot.lang.Nil;
-import perobobbot.pzplugin.redemption.RedemptionMap;
 import perobobbot.pzplugin.json.PZRedemptionResult;
+import perobobbot.pzplugin.redemption.RedemptionMap;
 import perobobbot.security.com.SimpleUser;
 
 @RequiredArgsConstructor

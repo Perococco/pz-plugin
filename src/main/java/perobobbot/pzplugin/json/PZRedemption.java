@@ -4,7 +4,6 @@ package perobobbot.pzplugin.json;
 import lombok.NonNull;
 import lombok.Value;
 import perobobbot.lang.IdentityInfo;
-import perobobbot.lang.ViewerIdentity;
 import perobobbot.twitch.api.UserInfo;
 
 import java.util.Optional;

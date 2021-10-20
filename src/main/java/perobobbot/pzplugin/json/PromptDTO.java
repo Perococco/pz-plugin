@@ -2,7 +2,6 @@ package perobobbot.pzplugin.json;
 
 import lombok.NonNull;
 import lombok.Value;
-import perobobbot.pzplugin.rewards.Prompt;
 
 @Value
 public class PromptDTO {
