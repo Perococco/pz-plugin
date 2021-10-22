@@ -14,13 +14,16 @@ import perobobbot.twitch.eventsub.api.event.ChannelPointsCustomRewardUpdateEvent
 
 import java.util.Optional;
 
+/**
+ * Transform some notification to PZNotification.
+ * {@link ChannelPointsCustomRewardUpdateEvent} are transformed to {@link PZRewardUpdate} to
+ * handle the prompt that contains some information the user is not interested in.
+ */
 @RequiredArgsConstructor
 public class NotificationAdapter implements NotificationListener {
 
     private final @NonNull NotificationDispatcher notificationDispatcher;
     private final @NonNull RedemptionHandler redemptionHandler;
-
-    private final long t = System.nanoTime();
 
     @Override
     public void onMessage(@NonNull Notification notification) {

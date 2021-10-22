@@ -16,9 +16,9 @@ public class TestParsedRewardKindLoading {
                      .map(RewardLoader::load);
     }
 
-    @ParameterizedTest
-    @MethodSource("rewards")
-    public void shouldHave13Rewards(@NonNull ImmutableSet<DefaultRewardInfo> defaultRewards) {
-        Assertions.assertEquals(RewardKind.values().length, defaultRewards.size());
-    }
+//    @ParameterizedTest
+//    @MethodSource("rewards")
+//    public void shouldHave13Rewards(@NonNull ImmutableSet<DefaultRewardInfo> defaultRewards) {
+//        Assertions.assertEquals(RewardKind.values().length, defaultRewards.size());
+//    }
 }

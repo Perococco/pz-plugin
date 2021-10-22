@@ -44,6 +44,10 @@ public class RewardUpdater implements EndPoint<RewardUpdateParameters> {
                                                        .paused(paused)
                                                        .prompt(body.getFullPrompt());
 
+        if ("say".equals(body.getKind())) {
+            System.out.println("### "+body.getKind() + " PAUSED="+ paused);
+        }
+
         if (paused != null && paused) {
             builder.backgroundColor(PAUSED_COLOR);
         } else {

@@ -34,6 +34,7 @@ public class JPlugin implements Plugin {
         return ImmutableSet.of(
                 Requirements.USER_SERVICE,
                 Requirements.USER_AUTHENTICATOR,
+                Requirements.O_AUTH_TOKEN_IDENTIFIER_SETTER,
                 Requirements.NOTIFICATION_DISPATCHER,
                 Requirements.OBJECT_MAPPER_FACTORY,
                 Requirements.VIEWER_IDENTITY_SERVICE,
