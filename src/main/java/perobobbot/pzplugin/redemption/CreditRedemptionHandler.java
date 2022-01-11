@@ -4,9 +4,10 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import perobobbot.data.com.NotEnoughPoints;
 import perobobbot.data.service.BankService;
-import perobobbot.data.service.ViewerIdentityService;
+import perobobbot.data.service.PlatformUserService;
 import perobobbot.lang.Platform;
 import perobobbot.lang.PointType;
+import perobobbot.lang.TwitchIdentity;
 import perobobbot.lang.fp.Function1;
 import perobobbot.oauth.BroadcasterIdentifier;
 import perobobbot.oauth.OAuthContextHolder;
@@ -25,22 +26,22 @@ import java.util.UUID;
 public class CreditRedemptionHandler {
 
 
-    public static @NonNull Function1<ParsedRedemption,RedemptionCompleter> handler(@NonNull ViewerIdentityService viewerIdentityService,
+    public static @NonNull Function1<ParsedRedemption,RedemptionCompleter> handler(@NonNull PlatformUserService platformUserService,
                                                                                    @NonNull BankService bankService,
                                                                                    @NonNull TwitchService twitchService,
                                                                                    @NonNull OAuthTokenIdentifierSetter oAuthTokenIdentifierSetter) {
-        return r -> handle(viewerIdentityService,bankService,twitchService,oAuthTokenIdentifierSetter,r);
+        return r -> handle(platformUserService,bankService,twitchService,oAuthTokenIdentifierSetter,r);
     }
 
-    public static @NonNull RedemptionCompleter handle(@NonNull ViewerIdentityService viewerIdentityService,
+    public static @NonNull RedemptionCompleter handle(@NonNull PlatformUserService platformUserService,
                                                       @NonNull BankService bankService,
                                                       @NonNull TwitchService twitchService,
                                                       @NonNull OAuthTokenIdentifierSetter oAuthTokenIdentifierSetter,
                                                       @NonNull ParsedRedemption parsedRedemption) {
-        return new CreditRedemptionHandler(viewerIdentityService, bankService,twitchService,oAuthTokenIdentifierSetter,parsedRedemption).handle();
+        return new CreditRedemptionHandler(platformUserService, bankService,twitchService,oAuthTokenIdentifierSetter,parsedRedemption).handle();
     }
 
-    private final @NonNull ViewerIdentityService viewerIdentityService;
+    private final @NonNull PlatformUserService platformUserService;
     private final @NonNull BankService bankService;
     private final @NonNull TwitchService twitchService;
     private final @NonNull OAuthTokenIdentifierSetter oAuthTokenIdentifierSetter;
@@ -51,7 +52,7 @@ public class CreditRedemptionHandler {
         final var userInfo = parsedRedemption.getUserInfo();
         final var channelName = parsedRedemption.getChannelName();
         final var cost = parsedRedemption.getCost();
-        final var identity = viewerIdentityService.updateIdentity(Platform.TWITCH, userInfo.getId(), userInfo.getLogin(), userInfo.getName());
+        final var identity = platformUserService.updateUserIdentity(new TwitchIdentity(userInfo.getId(), userInfo.getLogin(), userInfo.getName()));
         final var tokenIdentifier = new BroadcasterIdentifier(Platform.TWITCH,userInfo.getId());
 
         oAuthTokenIdentifierSetter.wrapRun(tokenIdentifier, this::cancelRedemption);

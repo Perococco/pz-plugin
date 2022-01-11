@@ -37,7 +37,7 @@ public class JPlugin implements Plugin {
                 Requirements.O_AUTH_TOKEN_IDENTIFIER_SETTER,
                 Requirements.NOTIFICATION_DISPATCHER,
                 Requirements.OBJECT_MAPPER_FACTORY,
-                Requirements.VIEWER_IDENTITY_SERVICE,
+                Requirements.PLATFORM_USER_SERVICE,
                 Requirements.SUBSCRIPTION_SERVICE,
                 Requirements.BANK_SERVICE,
                 Requirements.TWITCH_SERVICE);

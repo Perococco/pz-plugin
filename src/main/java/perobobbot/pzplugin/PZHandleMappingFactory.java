@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jplugman.api.ServiceProvider;
 import lombok.NonNull;
 import org.springframework.web.servlet.HandlerMapping;
+import perobobbot.data.service.PlatformUserService;
 import perobobbot.data.service.SubscriptionService;
 import perobobbot.data.service.UserService;
-import perobobbot.data.service.ViewerIdentityService;
 import perobobbot.endpoint.RequestFactory;
 import perobobbot.lang.UserAuthenticator;
 import perobobbot.pzplugin.endpoint.*;
@@ -21,7 +21,7 @@ public class PZHandleMappingFactory {
     private final @NonNull UserAuthenticator userAuthenticator;
     private final @NonNull TwitchService twitchService;
     private final @NonNull UserService userService;
-    private final @NonNull ViewerIdentityService viewerIdentityService;
+    private final @NonNull PlatformUserService platformUserService;
     private final @NonNull SubscriptionService subscriptionService;
     private final @NonNull RedemptionMap redemptionMap;
 
@@ -30,7 +30,7 @@ public class PZHandleMappingFactory {
         this.twitchService = serviceProvider.getAnyService(Requirements.TWITCH_SERVICE);
         this.userService = serviceProvider.getAnyService(Requirements.USER_SERVICE);
         this.userAuthenticator = serviceProvider.getAnyService(Requirements.USER_AUTHENTICATOR);
-        this.viewerIdentityService = serviceProvider.getAnyService(Requirements.VIEWER_IDENTITY_SERVICE);
+        this.platformUserService = serviceProvider.getAnyService(Requirements.PLATFORM_USER_SERVICE);
         this.subscriptionService = serviceProvider.getAnyService(Requirements.SUBSCRIPTION_SERVICE);
         this.redemptionMap = redemptionMap;
     }
@@ -42,7 +42,7 @@ public class PZHandleMappingFactory {
         return b.put("/pz/rewards/sync", RewardSynchronizer.asSecuredEndPoint(twitchService))
                 .put("/pz/rewards/reset", RewardResetter.asSecuredEndPoint(twitchService))
                 .put("/pz/rewards", RewardUpdater.asSecuredEndPoint(twitchService))
-                .put("/pz/subscriptions", CreatePZSubscription.asSecuredEndPoint(subscriptionService,viewerIdentityService))
+                .put("/pz/subscriptions", CreatePZSubscription.asSecuredEndPoint(subscriptionService, platformUserService))
                 .post("/pz/redemptions", PZRedemptionHandler.asSecuredEndPoint(redemptionMap))
                 .build();
     }

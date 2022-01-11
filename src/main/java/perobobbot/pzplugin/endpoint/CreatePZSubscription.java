@@ -3,8 +3,8 @@ package perobobbot.pzplugin.endpoint;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import perobobbot.data.service.PlatformUserService;
 import perobobbot.data.service.SubscriptionService;
-import perobobbot.data.service.ViewerIdentityService;
 import perobobbot.endpoint.EndPoint;
 import perobobbot.endpoint.SecuredEndPoint;
 import perobobbot.lang.Conditions;
@@ -21,14 +21,14 @@ import java.util.stream.Stream;
 @Log4j2
 public class CreatePZSubscription implements EndPoint<Nil> {
 
-    public static @NonNull SecuredEndPoint<Nil> asSecuredEndPoint(@NonNull SubscriptionService subscriptionService, @NonNull ViewerIdentityService viewerIdentityService) {
-        return user -> new CreatePZSubscription(user, subscriptionService,viewerIdentityService);
+    public static @NonNull SecuredEndPoint<Nil> asSecuredEndPoint(@NonNull SubscriptionService subscriptionService, @NonNull PlatformUserService platformUserService) {
+        return user -> new CreatePZSubscription(user, subscriptionService,platformUserService);
     }
 
 
     private final @NonNull SimpleUser user;
     private final @NonNull SubscriptionService subscriptionService;
-    private final @NonNull ViewerIdentityService viewerIdentityService;
+    private final @NonNull PlatformUserService platformUserService;
 
     @Override
     public @NonNull Class<Nil> getBodyType() {
@@ -37,7 +37,7 @@ public class CreatePZSubscription implements EndPoint<Nil> {
 
     @Override
     public Object handle(Nil body) {
-        final var viewerIdentity = viewerIdentityService.findIdentity(Platform.TWITCH, user.getLogin()).orElseThrow(() -> new RuntimeException("TODO"));
+        final var platformUser = platformUserService.findPlatformUser(Platform.TWITCH, user.getLogin()).orElseThrow(() -> new RuntimeException("TODO"));
 
         Stream.of(
                       SubscriptionType.CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_ADD,
@@ -46,7 +46,7 @@ public class CreatePZSubscription implements EndPoint<Nil> {
                       SubscriptionType.CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
                       SubscriptionType.CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_UPDATE
               )
-              .forEach(s -> addSubscription(s, viewerIdentity.getViewerId()));
+              .forEach(s -> addSubscription(s, platformUser.getUserId()));
 
         return Nil.NIL;
     }

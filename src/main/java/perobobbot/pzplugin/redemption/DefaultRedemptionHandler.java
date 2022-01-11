@@ -27,11 +27,11 @@ public class DefaultRedemptionHandler implements RedemptionHandler {
             @NonNull ServiceProvider serviceProvider,
             @NonNull RedemptionMap redemptionMap) {
         this.redemptionMap = redemptionMap;
-        final var viewerIdentityService = serviceProvider.getAnyService(Requirements.VIEWER_IDENTITY_SERVICE);
+        final var platformUserService = serviceProvider.getAnyService(Requirements.PLATFORM_USER_SERVICE);
         final var bankService = serviceProvider.getAnyService(Requirements.BANK_SERVICE);
         final var twitchService = serviceProvider.getAnyService(Requirements.TWITCH_SERVICE);
         final var oauth = serviceProvider.getAnyService(Requirements.O_AUTH_TOKEN_IDENTIFIER_SETTER);
-        this.creditHandler = CreditRedemptionHandler.handler(viewerIdentityService, bankService,twitchService,oauth);
+        this.creditHandler = CreditRedemptionHandler.handler(platformUserService, bankService,twitchService,oauth);
         this.rewardHandler = RewardRedemptionHandler.handler(twitchService,oauth);
     }
 
